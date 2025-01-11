@@ -121,6 +121,8 @@ if not TOKEN:
 
 def button_click(update, context):
     query = update.callback_query
+    user = query.from_user  # Retrieve the user who clicked the button
+    username = user.username or user.full_name or user.id  # Use username, full name, or ID as fallback
 
     if query.data.startswith('toggle__'):
         index = query.data.replace('toggle__', '')
@@ -142,7 +144,7 @@ def button_click(update, context):
         for btn in query.message.reply_markup.inline_keyboard:
             checked = btn[0].text.startswith(CHECK_CHAR)
             btn_text = btn[0].text.replace(f'{UNCHECK_CHAR} ', '').replace(f'{CHECK_CHAR} ', '')
-            state[btn_text] = checked
+            state[btn_text] = {'checked': checked,'toggled_by': username}
         
         print('setting state', state)
         reply_id = query.message.message_id
@@ -152,7 +154,7 @@ def button_click(update, context):
         context.bot.edit_message_text(
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
-            text=f'Click to toggle',
+            text=f'Click to toggle (Last updated by: {username})',  # Show who toggled
             reply_markup=query.message.reply_markup
         )
        
