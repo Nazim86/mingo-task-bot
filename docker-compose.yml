@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+  tobedo:
+    image: devforth/tobedo
+    environment:
+      - TG_TOKEN=8066436546:AAG5cOp1PjvAARnpG8K0ZMyZC4rSC5BN7MU
+    volumes:
+      - /volumes/tobedo/:/code/db/
