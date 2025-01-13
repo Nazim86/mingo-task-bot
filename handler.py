@@ -15,7 +15,7 @@ import pytz  # Import the pytz library for timezone support
 
 
 
-DB_NAME = './db/tobedo.sqlite3'
+DB_NAME = '/code/db/tobedo.sqlite3'
 
 CHECK_CHAR = '✅'
 UNCHECK_CHAR = '⬜'
@@ -306,6 +306,7 @@ def startBotPrompt(update, context):
 You can set the mode to "todo" with /only_todo command to make me reply only to messages starting with "todo" or "td" or "c " """)
 
 def main() -> None:
+    os.makedirs('./db', exist_ok=True)  # Ensure the 'db' directory exists
     gen_db()
     cleanup_old_replies()
     updater = Updater(TOKEN)
