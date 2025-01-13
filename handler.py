@@ -15,7 +15,7 @@ import pytz  # Import the pytz library for timezone support
 
 
 
-DB_NAME = '/code/db/tobedo.sqlite3'
+DB_NAME = '/tmp/tobedo.sqlite3'
 
 CHECK_CHAR = '✅'
 UNCHECK_CHAR = '⬜'
